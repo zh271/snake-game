@@ -32,3 +32,13 @@ public:
     void updateEffectAfterEating(Snake& snake);
     void handleMagnet(GameState& state, Snake& snake);
 };
+// ============================================================
+// 全局自由函数接口（供 game_core 等模块调用）
+// ============================================================
+void PowerUp_Init(GameState* state);
+void PowerUp_Maintain(GameState* state);
+void PowerUp_Spawn(GameState* state, int index);
+bool PowerUp_CheckEat(GameState* state, Snake* snake);
+void PowerUp_Apply(GameState* state, Snake* snake, PowerUpType type);
+void PowerUp_UpdateEffectAfterEating(Snake* snake);
+void PowerUp_HandleMagnet(GameState* state, Snake* snake);

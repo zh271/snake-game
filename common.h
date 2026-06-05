@@ -9,8 +9,8 @@ constexpr int MAX_SNAKE_LENGTH = MAP_WIDTH * MAP_HEIGHT;
 constexpr int OBSTACLE_COUNT = 20;
 constexpr int POWERUP_ON_MAP = 2;
 constexpr int INIT_SNAKE_LENGTH = 3;
-constexpr int NORMAL_MOVE_INTERVAL_MS = 1000; // 1秒移动一格
-constexpr int SLOW_MOVE_INTERVAL_MS = 2000;   // 减速：2秒移动一格
+constexpr int NORMAL_MOVE_INTERVAL_MS = 111; // 1秒移动9格
+constexpr int SLOW_MOVE_INTERVAL_MS = 222;   // 减速：1秒移动4.5格
 
 // ---------------------------------------------------------
 // 2. 基础数据类型
