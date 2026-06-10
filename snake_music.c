@@ -68,6 +68,7 @@ void GameAudio_play(int soundType)
             PlaySound(
                 TEXT("bgm.wav"),
                 NULL,
+                /*告诉函数"bgm.wav"是文件 去寻找 控制音乐的异步播放和循环播放*/
                 SND_FILENAME |
                 SND_ASYNC |
                 SND_LOOP
