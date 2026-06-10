@@ -6,6 +6,8 @@
 游戏音效类型定义
 ========================================
 */
+#include <windows.h>
+#include <mmsystem.h>
 
 /* 背景音乐 */
 #define SOUND_BGM_START      1
