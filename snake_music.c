@@ -50,43 +50,73 @@
 */
 void GameAudio_play(int soundType)
 {
-#ifdef _WIN32
-
-    switch (soundType)
+    switch(soundType)
     {
         /*
-            开始播放背景音乐。
+        =====================================
+        开始背景音乐
+        =====================================
 
-            SND_LOOP：
-                循环播放。
+        功能：
+            打开 bgm.wav
 
-            SND_ASYNC：
-                异步播放，不阻塞游戏运行。
+        open：
+            创建一个播放器
+
+        alias bgm：
+            给播放器起名 bgm
+
+        repeat：
+            无限循环播放
+
+        作用：
+            游戏开始后一直播放背景音乐
         */
         case SOUND_BGM_START:
 
-            PlaySound(
-                TEXT("bgm.wav"),
+            mciSendString(
+                "open bgm.wav alias bgm",
                 NULL,
-                /*告诉函数"bgm.wav"是文件 去寻找 控制音乐的异步播放和循环播放*/
-                SND_FILENAME |
-                SND_ASYNC |
-                SND_LOOP
+                0,
+                NULL
+            );
+
+            mciSendString(
+    		"play bgm",
+    		NULL,
+    		0,
+    		NULL
+			);
+
+            break;
+
+        /*
+        =====================================
+        停止背景音乐
+        =====================================
+        */
+        case SOUND_BGM_STOP:
+
+            mciSendString(
+                "stop bgm",
+                NULL,
+                0,
+                NULL
+            );
+
+            mciSendString(
+                "close bgm",
+                NULL,
+                0,
+                NULL
             );
 
             break;
 
         /*
-            停止当前播放的背景音乐。
-        */
-        case SOUND_BGM_STOP:
-
-            PlaySound(NULL, NULL, 0);
-
-            break;
-
-        /*
-            播放蛇转向音效。
+        =====================================
+        转向音效
+        =====================================
         */
         case SOUND_TURN:
 
@@ -100,7 +130,9 @@ void GameAudio_play(int soundType)
             break;
 
         /*
-            播放普通食物音效。
+        =====================================
+        普通食物
+        =====================================
         */
         case SOUND_EAT_FOOD:
 
@@ -114,7 +146,9 @@ void GameAudio_play(int soundType)
             break;
 
         /*
-            播放大食物音效。
+        =====================================
+        大食物
+        =====================================
         */
         case SOUND_EAT_BIG_FOOD:
 
@@ -128,7 +162,9 @@ void GameAudio_play(int soundType)
             break;
 
         /*
-            播放磁铁道具音效。
+        =====================================
+        磁铁
+        =====================================
         */
         case SOUND_EAT_MAGNET:
 
@@ -142,7 +178,9 @@ void GameAudio_play(int soundType)
             break;
 
         /*
-            播放钻头道具音效。
+        =====================================
+        钻头
+        =====================================
         */
         case SOUND_EAT_DRILL:
 
@@ -156,7 +194,9 @@ void GameAudio_play(int soundType)
             break;
 
         /*
-            播放消食片音效。
+        =====================================
+        消食片
+        =====================================
         */
         case SOUND_EAT_DIGEST:
 
@@ -170,7 +210,9 @@ void GameAudio_play(int soundType)
             break;
 
         /*
-            播放减速道具音效。
+        =====================================
+        减速道具
+        =====================================
         */
         case SOUND_EAT_SLOW:
 
@@ -184,9 +226,33 @@ void GameAudio_play(int soundType)
             break;
 
         /*
-            播放蛇死亡音效。
+        =====================================
+        死亡音效
+        =====================================
+
+        设计：
+            先关闭背景音乐
+
+            再播放死亡音效
+
+        这样不会出现：
+            死亡时BGM还在响
         */
         case SOUND_DEAD:
+
+            mciSendString(
+                "stop bgm",
+                NULL,
+                0,
+                NULL
+            );
+
+            mciSendString(
+                "close bgm",
+                NULL,
+                0,
+                NULL
+            );
 
             PlaySound(
                 TEXT("dead.wav"),
@@ -200,6 +266,4 @@ void GameAudio_play(int soundType)
         default:
             break;
     }
-
-#endif
 }
